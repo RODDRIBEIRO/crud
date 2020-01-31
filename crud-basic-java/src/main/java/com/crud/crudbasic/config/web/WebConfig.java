@@ -1,5 +1,7 @@
 package com.crud.crudbasic.config.web;
 
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -11,7 +13,6 @@ public class WebConfig {
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
-
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**").allowedOrigins("*")
@@ -20,5 +21,12 @@ public class WebConfig {
 			}
 
 		};
+
+	}
+
+	@Bean
+	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>
+	  webServerFactoryCustomizer() {
+	    return factory -> factory.setContextPath("/crud");
 	}
 }
