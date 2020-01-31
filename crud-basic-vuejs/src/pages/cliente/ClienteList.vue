@@ -39,10 +39,39 @@
           <template v-slot:body="props">
             <q-tr :props="props">
               <q-td
-                key="cliente"
-                :props="props"
-              >
-                {{ props.row.nome}}
+                key="id"
+                :props="props">
+                {{ props.row.id}}
+              </q-td>
+              <q-td
+                key="nome"
+                :props="props">
+                {{ props.row.nome }}
+              </q-td>
+              <q-td
+                key="logradouro"
+                :props="props">
+                <ul v-for="(l, i) in props.row.enderecos" :key="i" >
+                      {{
+                        l.logradouro
+                      }}
+                  </ul>
+
+                {{ props.row.enderecos.logradouro }}
+              </q-td>
+
+              <q-td
+                key="estado"
+                :props="props">
+                <ul v-for="(l, i) in props.row.enderecos" :key="i" >
+                  <ul v-for="(j, i) in l.estado" :key="i" >
+                    {{
+                    l.estado.descricao
+                    }}
+                  </ul>
+                </ul>
+
+                {{ props.row.enderecos.logradouro }}
               </q-td>
             </q-tr>
           </template>
@@ -55,15 +84,17 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 const columns = [
-  { name: 'nome', align: 'left', label: 'Nome', field: 'name' },
+  { name: 'id', align: 'left', label: 'ID', field: '' },
+  { name: 'nome', align: 'left', label: 'Nome', field: '' },
+  { name: 'logradouro', align: 'left', label: 'Logradouro', field: '' },
+  { name: 'estado', align: 'left', label: 'Estado', field: '' },
   { name: 'excluir', align: 'right', label: 'Excluir', field: 'excluir' }
 ]
 export default {
   data () {
     return {
-      cont: 0,
-      columns,
-      data: []
+      data: [],
+      columns
     }
   },
   computed: {

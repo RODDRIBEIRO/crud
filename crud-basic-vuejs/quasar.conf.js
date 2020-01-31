@@ -80,8 +80,21 @@ module.exports = function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: false,
-      host: '0.0.0.0',
       port: 9000,
+      proxy: {
+        // proxy all requests starting with /api to jsonplaceholder
+        '/crud': {
+          // target: 'http://dev.www2.desenvolver.prodepa.gov.br:8080/ramal-service',
+          target: 'http://localhost:8080/crud',
+          changeOrigin: true,
+          secure: false,
+          pathRewrite: {
+            '^/crud': ''
+          }
+
+        }
+      },
+
       open: true // opens browser window automatically */
     },
 

@@ -1,13 +1,10 @@
 /* eslint-disable indent */
 import axios from 'axios'
 
-const urlAPI = `localhost:8080/clientes`
+const urlAPI = `/crud/clientes`
 
 const getAllClientes = ({ commit }, params) => {
-    console.log(params)
-    return axios.get(urlAPI, {
-        params: params
-    })
+    return axios.get(urlAPI)
         .then((res) => {
             commit('SET_LIST_CLIENTES', res.data)
             return res.data
