@@ -68,6 +68,23 @@
                   </div>
                 </div>
               </q-td>
+              <q-td
+                key="excluir"
+                :props="props"
+              >
+                <q-btn
+                  dense
+                  no-border
+                  @click="toDelete(props)"
+                >
+                  <q-icon
+                    color="red-9"
+                    size="sm"
+                    name="delete"
+                  />
+                </q-btn>
+              </q-td>
+
             </q-tr>
           </template>
         </q-table>
@@ -95,7 +112,7 @@ export default {
     ...mapGetters('cliente', ['getStateClientes'])
   },
   methods: {
-    ...mapActions('cliente', ['getAllClientes'])
+    ...mapActions('cliente', ['getAllClientes', 'deletarCliente'])
   },
   async mounted () {
     await this.getAllClientes()
